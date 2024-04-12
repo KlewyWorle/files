@@ -7,15 +7,7 @@
 using namespace klewy;
 int main()
 {
-    File fil("fuck.txt");
-    fil.write_text(10, false);
-    string f = fil.read_all();
-
-    
-    std::cout << f << std::endl;
-
-
-
+    File file("file.txt");
     // TODO: implement json lib
 
     return 0;
