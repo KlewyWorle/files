@@ -3,6 +3,7 @@
 #include <filesystem>
 #include <fstream>
 #include <ios>
+#include <nlohmann/json_fwd.hpp>
 #include <optional>
 #include <sstream>
 
@@ -71,4 +72,31 @@ void File::write_text(double value, bool truncate)
         file.close();
     }
 }
+void File::write_json(nlohmann::json &json)
+{
+    ofstream file;
+    file.open(file_path, ios_base::trunc);
+    if(file.is_open())
+    {
+        file << json;
+        file.flush();
+        file.close();
+    }
+}
+nlohmann::json File::read_json()
+{
+    nlohmann::json j;
+    ifstream file;
+    file.open(file_path);
+    if(file.is_open())
+    {
+        j = j.parse(file);
+        file.close(); 
+    }
+    return j;
+}
+
+
+
+
 }
